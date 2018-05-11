@@ -1,100 +1,90 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+"
+call plug#begin('~/.local/share/nvim/site/plugged')
+  " Make sure you use single quotes
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+  " lean & mean status/tabline for vim that's light as air<Paste>
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
+  " A Vim plugin for visually displaying indent levels in code
+Plug 'yggdroot/indentline'
 
-" lean & mean status/tabline for vim that's light as air<Paste>
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+  " Asynchronous Lint Engine
+Plug 'w0rp/ale'
 
-" A Vim plugin for visually displaying indent levels in code
-Plugin 'yggdroot/indentline'
+  " ctrlp.vim
+Plug 'kien/ctrlp.vim'
 
-" Asynchronous Lint Engine
-Plugin 'w0rp/ale'
-
-" colorscheme
-Plugin 'altercation/vim-colors-solarized' 
-Plugin 'dracula/vim'
+  " colorscheme
+Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim'
 
 
+  " ============================================================================
+  "                                   RUST
+  " ============================================================================
+  " Dark powered asynchronous completion framework for neovim/Vim8
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+  " This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'roxma/nvim-cm-racer'
 " ==============================================================================
-"                                   RUST
-" ==============================================================================
-" ⚡️ Fast, Extensible, Async Completion Framework for Neovi
-Plugin 'roxma/nvim-completion-manager'
 
-" This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
-Plugin 'roxma/nvim-cm-racer'
-" ==============================================================================
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required<Paste>
+  " Initialize plugin system
+call plug#end()
 
 " ==============================================================================
 "                                   General
 " ==============================================================================
-set nu
-set history=2000
+set number	            " Show line numbers
+set linebreak	        " Break lines at word (requires Wrap lines)
+set showbreak=+++ 	    " Wrap-broken line prefix
+
+set textwidth=100	    " Line wrap (number of cols)
+set showmatch	        " Highlight matching brace
+set visualbell	        " Use visual bell (no beeping)
+set showcmd             " Display an incomplete command in the corner of the Vim
+
+set hlsearch	        " Highlight all search results
+set smartcase	        " Enable smart-case search
+set ignorecase	        " Always case-insensitive
+set incsearch	        " Searches for strings incrementally
+
+set autoindent	        " Auto-indent new lines
+set expandtab	        " Use spaces instead of tabs
+set shiftwidth=4	    " Number of auto-indent spaces
+set smartindent	        " Enable smart-indent
+set smarttab	        " Enable smart-tabs
+set softtabstop=4	    " Number of spaces per Tab
+
+set backspace=indent,eol,start " make that backspace key work the way it should
+set whichwrap+=<,>,h,l
 
 syntax enable           " Turn on color syntax highlighting
-set background=dark
-colorscheme solarized
-filetype on
-filetype plugin on
-filetype indent on
 
-" movement
-set scrolloff=7                 " keep 3 lines when scrolling
-
-cnoremap <C-j> <t_kd>
-cnoremap <C-k> <t_ku>
-
-" Show invisible characters
-set showbreak=↪\ 
+  " Show invisible characters
+set showbreak=↪\
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set list
 
-" show
-set ruler                       " show the current row and column
-set number                      " show line numbers
-set nowrap
-set showcmd                     " display incomplete commands
-set showmode                    " display current modes
-set showmatch                   " jump to matches when entering parentheses
-set matchtime=2                 " tenths of a second to show the matching parenthesis
+  " Advanced
+set ruler	            " Show row and column ruler information
 
-" search
-set hlsearch                    " highlight searches
-set incsearch                   " do incremental searching, search as you type
-set smartcase                   " no ignorecase if Uppercase char present
+set undolevels=1000	    " Number of undo levels
+set backspace=indent,eol,start  " Backspace behaviour
 
-" tab
-set expandtab                   " expand tabs to spaces
-set smarttab
-set shiftround
-
-" indent
-set autoindent
-set smartindent
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2                " insert mode tab and backspace use 2 spaces
-
-
-" encoding
+  " encoding
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set termencoding=utf-8
@@ -103,24 +93,22 @@ set formatoptions+=m
 
 set formatoptions+=B
 
-" select & complete
+  " select & complete
 set selection=inclusive
 set selectmode=mouse,key
 
 set completeopt=longest,menu
-set wildmenu                           " show a navigable menu for tab completion"
+set wildmenu                           " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
-set backspace=indent,eol,start  " make that backspace key work the way it should
+set backspace=indent,eol,start        " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
 " ==============================================================================
 "                                   Airline
 " ==============================================================================
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
@@ -128,7 +116,7 @@ let g:airline_solarized_bg='dark'
 " ==============================================================================
 "                                   ALE
 " ==============================================================================
-" Navigate between errors
+  " Navigate between errors
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)   " CTRL+k
 nmap <silent> <C-j> <Plug>(ale_next_wrap)       " CTRL+j
 
@@ -136,8 +124,21 @@ let g:ale_linters = {
 \   'rust': ['rsl'],
 \}
 
-" Run linter on save
+  " Run linter on save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
+
+" =============================================================================
+" ctrlp.vim
+" =============================================================================
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+" =============================================================================
+" Deoplete
+" =============================================================================
+let g:deoplete#enable_at_startup = 1
