@@ -24,3 +24,7 @@ fpath+=~/.zfunc
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
+
+# Install Ruby Gems to ~/.gems
+export GEM_HOME=$HOME/.gems
+export PATH=$HOME/.gems/bin:$PATH
