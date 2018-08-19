@@ -1,10 +1,17 @@
+export ZDOTDIR="${HOME}/.config/zsh.d"
+
+# Basic zsh config.
+HISTFILE="${ZDOTDIR}/.zsh_history"
+HISTSIZE='10000'
+SAVEHIST="${HISTSIZE}"
+
 # Set up the prompt
 
 autoload -Uz promptinit
 promptinit
 
 # prompt theme
-prompt adam1
+prompt clint
 
 setopt histignorealldups sharehistory
 
@@ -19,11 +26,6 @@ zle -N down-line-or-beginning-search
 
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
-
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history
 
 # Use modern completion system
 autoload -Uz compinit
@@ -48,18 +50,16 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # some ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls --color'
+alias ll='ls --color -alF'
+alias la='ls --color -A'
+alias l='ls --color -CF'
 
 # You may want to put all your additions into a separate file like
 # ~/.zsh_aliases, instead of adding them here directly.
-if [ -f ~/.zsh_aliases ]; then
-    . ~/.zsh_aliases
+if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
+    . ${ZDOTDIR:-$HOME}/.zsh_aliases
 fi
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
