@@ -59,6 +59,12 @@ alias l='ls --color -CF'
 # ~/.zsh_aliases, instead of adding them here directly.
 if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
     . ${ZDOTDIR:-$HOME}/.zsh_aliases
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+  . ~/.config/exercism/exercism_completion.zsh
 fi
 
 # colored GCC warnings and errors
