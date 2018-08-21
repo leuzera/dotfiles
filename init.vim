@@ -15,6 +15,15 @@ Plug 'yggdroot/indentline'
   " Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
+" Language Server Protocol (LSP) support for vim and neovim. 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" A command-line fuzzy finder 
+Plug 'junegunn/fzf'
+
   " ctrlp.vim
 Plug 'kien/ctrlp.vim'
 
@@ -83,6 +92,7 @@ set ruler	            " Show row and column ruler information
 
 set undolevels=1000	    " Number of undo levels
 set backspace=indent,eol,start  " Backspace behaviour
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "TrueColor
 
   " encoding
 set encoding=utf-8
@@ -140,3 +150,18 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " Deoplete
 " =============================================================================
 let g:deoplete#enable_at_startup = 1
+
+" =============================================================================
+" LanguageClient
+" =============================================================================
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'rls'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
