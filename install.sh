@@ -1,40 +1,46 @@
 #! /bin/zsh
 
-if [command -v nvim]
+if command -v nvim > /dev/null;
 then
     echo "Configuring neovim..."
-    sudo ln -sfi ~/.dotfiles/init.vim ~/.config/nvim/init.vim
+    ln -sfi ~/.dotfiles/init.vim ~/.config/nvim/init.vim
     echo "\tdone."
 else
     echo "Neovim not installed."
 fi
 
-if [command -v zsh]
+if command -v zsh > /dev/null;
 then
     echo "Configuring zsh..."
-    sudo ln -sfi ~/.dotfiles/zshenv ${HOME}/.zshenv
+    ln -sfi ~/.dotfiles/zshenv_home ${HOME}/.zshenv
     . ${HOME}/.zshenv
 
-    sudo ln -sfi ~/.dotfiles/zshrc ${ZDOTDIR:-$HOME}/.zshrc
-    sudo ln -sfi ~/.dotfiles/zsh_aliases ${ZDOTDIR:-$HOME}/.zsh_aliases
+    if [[ -n ${ZDOTDIR} ]];
+    then
+        mkdir ${ZDOTDIR}/zsh
+        ln -sfi ~/.dotfiles/zshenv ${ZDOTDIR}/.zshenv
+    fi
+
+    ln -sfi ~/.dotfiles/zshrc ${ZDOTDIR:-$HOME}/.zshrc
+    ln -sfi ~/.dotfiles/zsh_aliases ${ZDOTDIR:-$HOME}/.zsh_aliases
     echo "\tdone."
 else
     echo "Zsh not installed."
 fi
 
-if [command -v tmux]
+if command -v tmux > /dev/null;
 then
     echo "Configuring tmux..."
-    sudo ln -sfi ~/.dotfiles/tmux.conf ~/.tmux.conf
+    ln -sfi ~/.dotfiles/tmux.conf ~/.tmux.conf
     echo "\tdone."
 else
     echo "Tmux not installed."
 fi
 
-if [[ -d ${ZDOTDIR:-$HOME}/.zprezto ]]
+if [[ -d ${ZDOTDIR:-$HOME}/.zprezto ]];
 then
     echo "Configuring zpresto..."
-    sudo ln -sfi ~/.dotfiles/zprestorc ~/.zpreztorc
+    ln -sfi ~/.dotfiles/zprestorc ${ZDOTDIR:-$HOME}/.zpreztorc
     echo "\tdone."
 else
     echo "ZPresto not installed."

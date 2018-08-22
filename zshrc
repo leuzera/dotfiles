@@ -1,5 +1,3 @@
-export ZDOTDIR="${HOME}/.config/zsh.d"
-
 # Basic zsh config.
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='10000'
@@ -68,5 +66,3 @@ if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
