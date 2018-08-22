@@ -11,7 +11,7 @@ autoload -Uz promptinit
 promptinit
 
 # prompt theme
-prompt clint
+prompt bart
 
 setopt histignorealldups sharehistory
 
@@ -59,6 +59,7 @@ alias l='ls --color -CF'
 # ~/.zsh_aliases, instead of adding them here directly.
 if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
     . ${ZDOTDIR:-$HOME}/.zsh_aliases
+fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
