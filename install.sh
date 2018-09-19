@@ -33,6 +33,33 @@ else
     echo "Tmux not installed."
 fi
 
+if command -v tint2 > /dev/null; then
+    echo "Configuring tint2..."
+
+    if [[ ! -d ~/.config/tint2 ]]; then
+        mkdir ~/.config/tint2
+    fi
+
+    ln -sfi ./top.dracula.tint2rc ~/.config/tint2/top.dracula.tint2rc
+    ln -sfi ./bottom.dracula.tint2rc ~/.config/tint2/bottom.dracula.tint2rc
+else
+    echo "Tint2 not installed."
+fi
+
+if command -v rofi > /dev/null; then
+    echo "Configuring rofi..."
+
+    if [[ ! -d ~/.config/rofi ]]; then
+        mkdir ~/.config/rofi
+    fi
+
+    ln -sfi ./rofi.config ~/.config/rofi/config
+    echo "\tdone."
+else
+    echo "Rofi not installed."
+fi
+
+
 if [[ -d ${ZDOTDIR:-$HOME}/.zprezto ]]; then
     echo "Configuring zpresto..."
     ln -sfi ~/.dotfiles/zprestorc ${ZDOTDIR:-$HOME}/.zpreztorc
