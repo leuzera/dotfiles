@@ -59,7 +59,7 @@ if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
     . ${ZDOTDIR:-$HOME}/.zsh_aliases
 fi
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    PATH="$PATH:$HOME/.local/bin"
 fi
 
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
