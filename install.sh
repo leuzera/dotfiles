@@ -1,5 +1,6 @@
 #! /bin/zsh
 
+############ Neovim ###################
 if command -v nvim > /dev/null; then
     echo "Configuring neovim..."
     ln -sfi ~/.dotfiles/init.vim ~/.config/nvim/init.vim
@@ -8,6 +9,7 @@ else
     echo "Neovim not installed."
 fi
 
+################ Zsh ##################
 if command -v zsh > /dev/null; then
     echo "Configuring zsh..."
     ln -sfi ~/.dotfiles/zshenv_home ${HOME}/.zshenv
@@ -25,6 +27,7 @@ else
     echo "Zsh not installed."
 fi
 
+############### Tmux ####################
 if command -v tmux > /dev/null; then
     echo "Configuring tmux..."
     ln -sfi ~/.dotfiles/tmux.conf ~/.tmux.conf
@@ -33,19 +36,17 @@ else
     echo "Tmux not installed."
 fi
 
+############# Tint2 #####################
 if command -v tint2 > /dev/null; then
     echo "Configuring tint2..."
 
-    if [[ ! -d ~/.config/tint2 ]]; then
-        mkdir ~/.config/tint2
-    fi
+    ln -sfi ./tint2 ~/.config/tint2
 
-    ln -sfi ./top.dracula.tint2rc ~/.config/tint2/top.dracula.tint2rc
-    ln -sfi ./bottom.dracula.tint2rc ~/.config/tint2/bottom.dracula.tint2rc
 else
     echo "Tint2 not installed."
 fi
 
+############### Rofi ##################
 if command -v rofi > /dev/null; then
     echo "Configuring rofi..."
 
@@ -59,7 +60,7 @@ else
     echo "Rofi not installed."
 fi
 
-
+################# ZPrezto ################
 if [[ -d ${ZDOTDIR:-$HOME}/.zprezto ]]; then
     echo "Configuring zpresto..."
     ln -sfi ~/.dotfiles/zprestorc ${ZDOTDIR:-$HOME}/.zpreztorc
