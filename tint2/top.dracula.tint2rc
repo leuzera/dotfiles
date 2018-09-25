@@ -168,6 +168,7 @@ execp_centered = 1
 # Network load
 execp = new
 execp_command = stdbuf -oL bwm-ng -o csv -t 1000 -u bytes | awk -F ';' '/total/ {printf "Down: %.2fKB/s UP: %.2fKB/s\n", ($4/1.0e3), ($3/1.0e3)}; fflush(stdout)'
+execp_tooltip =
 execp_continuous = 1
 execp_interval = 1
 execp_font_color = #ffffff 100
@@ -178,6 +179,7 @@ execp_centered = 1
 # Temperatura da CPU
 execp = new
 execp_command = sensors -u | grep _input | head -n1 | awk -F ':' '{printf "%.2f ºC\n", $2}; fflush(stdout)'
+execp_tooltip =
 execp_interval = 1
 execp_font_color = #ffffff 100
 execp_background_id = 1
@@ -188,6 +190,7 @@ execp_centered = 1
 # Memoria
 execp = new
 execp_command = free | grep Mem.: | awk '{printf "Mem: %.2f GB\n", ($7/1.0e6)}'
+execp_tooltip = Memória disponivel para novos programas
 execp_continuous = 1
 execp_interval = 1
 execp_font_color = #ffffff 100
