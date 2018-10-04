@@ -1,4 +1,5 @@
 ZDOTDIR="${HOME}/.config/zsh"
+fpath=("${ZDOTDIR}/user-functions" $fpath)
 if [[ -d ${HOME}/zsh ]];
 then
     . $ZDOTDIR/.zshenv

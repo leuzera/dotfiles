@@ -9,7 +9,7 @@ autoload -Uz promptinit
 promptinit
 
 # prompt theme
-prompt bart
+prompt pure
 
 setopt histignorealldups sharehistory
 
@@ -65,4 +65,7 @@ fi
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

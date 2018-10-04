@@ -18,10 +18,16 @@ if command -v zsh > /dev/null; then
     if [[ ! -d ${ZDOTDIR} ]]; then
         mkdir ${ZDOTDIR}
     fi
+    if [[ ! -d ${ZDOTDIR}/user-functions ]]; then
+        mkdir ${ZDOTDIR}/user-functions
+    fi
 
     ln -sfi ~/.dotfiles/zshenv ${ZDOTDIR}/.zshenv
     ln -sfi ~/.dotfiles/zshrc ${ZDOTDIR:-$HOME}/.zshrc
     ln -sfi ~/.dotfiles/zsh_aliases ${ZDOTDIR:-$HOME}/.zsh_aliases
+
+    ln -sfi ~/.dotfiles/pure/pure.zsh ${ZDOTDIR:-$HOME}/user-functions/prompt_pure_setup
+    ln -sfi ~/.dotfiles/pure/async.zsh ${ZDOTDIR:-$HOME}/user-functions/async
     echo "\tdone."
 else
     echo "Zsh not installed."
