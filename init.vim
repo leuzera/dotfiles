@@ -59,7 +59,6 @@ call plug#end()
 set linebreak	        " Break lines at word (requires Wrap lines)
 set showbreak=+++ 	    " Wrap-broken line prefix
 
-set textwidth=80	    " Line wrap (number of cols)
 set showmatch	        " Highlight matching brace
 set visualbell	        " Use visual bell (no beeping)
 set showcmd             " Display an incomplete command in the corner of the Vim
@@ -80,7 +79,7 @@ set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
 syntax enable           " Turn on color syntax highlighting
-colorscheme dracula
+" colorscheme dracula
 
   " Show invisible characters
 set showbreak=↪\
@@ -120,6 +119,7 @@ set whichwrap+=<,>,h,l
 " ==============================================================================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='solarized'
 
 " ==============================================================================
 "                                   ALE
