@@ -46,7 +46,7 @@ fi
 if command -v tint2 > /dev/null; then
     echo "Configuring tint2..."
 
-    ln -sfi $(readlink -f ./tint2) ~/.config/
+    ln -sfi $(readlink -f ./tint2) ~/.config/tint2
 
 else
     echo "Tint2 not installed."
