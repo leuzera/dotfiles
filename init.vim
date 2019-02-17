@@ -1,3 +1,9 @@
+" Install Vim Plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+ endif
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -25,16 +31,15 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'junegunn/fzf'
 
   " ctrlp.vim
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+
+  " A tree explorer plugin for vim.
+Plug 'scrooloose/nerdtree'
 
   " colorscheme
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
 
-
-  " ============================================================================
-  "                                   RUST
-  " ============================================================================
   " Dark powered asynchronous completion framework for neovim/Vim8
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -44,6 +49,9 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+  " ============================================================================
+  "                                   RUST
+  " ============================================================================
   " This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
@@ -56,8 +64,14 @@ call plug#end()
 " ==============================================================================
 "                                   General
 " ==============================================================================
+let mapleader=","       " Change the <leader> key
 set linebreak	        " Break lines at word (requires Wrap lines)
 set showbreak=+++ 	    " Wrap-broken line prefix
+
+set wrap                " Break lines
+set textwidth=79        " Text width
+set formatoptions=qrn1  
+set colorcolumn=85      " Colored collum at 85 characters
 
 set showmatch	        " Highlight matching brace
 set visualbell	        " Use visual bell (no beeping)
@@ -79,18 +93,17 @@ set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
 syntax enable           " Turn on color syntax highlighting
-" colorscheme dracula
+colorscheme dracula
 
   " Show invisible characters
-set showbreak=↪\
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-set list
+" set showbreak=↪\
+" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+" set list
 
   " Advanced
 set ruler	            " Show row and column ruler information
 
 set undolevels=1000	    " Number of undo levels
-set backspace=indent,eol,start  " Backspace behaviour
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "TrueColor
 
   " encoding
@@ -111,15 +124,27 @@ set wildmenu                           " show a navigable menu for tab completio
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
 
-set backspace=indent,eol,start        " make that backspace key work the way it should
-set whichwrap+=<,>,h,l
+" Navigation
+" Disable arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+" j and k work the way you expect
+nnoremap j gj
+nnoremap k gk
 
 " ==============================================================================
 "                                   Airline
 " ==============================================================================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='solarized'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme='dracula'
 
 " ==============================================================================
 "                                   ALE
@@ -160,8 +185,18 @@ set hidden
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'rls'],
+    \ 'javascript': [],
+    \ 'css': ['css-languageserver', '--stdio'],
     \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" =============================================================================
+" NERDTree
+" =============================================================================
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+" Autoclose nvim if only NERDTree is open
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
