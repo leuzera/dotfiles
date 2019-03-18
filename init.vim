@@ -40,6 +40,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
 
+  " Vue syntax highlight
+Plug 'posva/vim-vue'
+
   " Dark powered asynchronous completion framework for neovim/Vim8
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -130,10 +133,6 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 " j and k work the way you expect
 nnoremap j gj
 nnoremap k gk
@@ -160,7 +159,7 @@ let g:ale_linters = {
   " Run linter on save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 
 " =============================================================================
@@ -187,6 +186,7 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'rls'],
     \ 'javascript': [],
     \ 'css': ['css-languageserver', '--stdio'],
+    \ 'vue': ['vls'],
     \ }
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
