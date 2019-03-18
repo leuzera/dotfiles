@@ -77,3 +77,9 @@ export NVM_DIR="$HOME/.nvm"
 # Install Ruby Gems to ~/.local/gems
 export GEM_HOME=$HOME/.local/gems
 export PATH=$HOME/.local/gems/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc' ]; then . '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/leonardo/.local/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/leonardo/.local/google-cloud-sdk/completion.zsh.inc'; fi
