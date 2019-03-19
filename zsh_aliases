@@ -2,3 +2,9 @@ alias atom-rs="ATOM_HOME=~/.atom-rust atom"
 alias atom-latex="ATOM_HOME=~/.atom-latex atom"
 alias atom-ruby="ATOM_HOME=~/.atom-ruby atom"
 alias atom-py="ATOM_HOME=~/.atom-python atom"
+
+# some ls aliases
+alias ls='ls --color'
+alias ll='ls --color -alF'
+alias la='ls --color -A'
+alias l='ls --color -CF'

@@ -47,12 +47,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# some ls aliases
-alias ls='ls --color'
-alias ll='ls --color -alF'
-alias la='ls --color -A'
-alias l='ls --color -CF'
-
 # You may want to put all your additions into a separate file like
 # ~/.zsh_aliases, instead of adding them here directly.
 if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
@@ -65,6 +59,7 @@ fi
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
