@@ -43,6 +43,8 @@ Plug 'dracula/vim'
   " Vue syntax highlight
 Plug 'posva/vim-vue'
 
+Plug 'majutsushi/tagbar'
+
   " Dark powered asynchronous completion framework for neovim/Vim8
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -156,6 +158,11 @@ let g:ale_linters = {
 \   'rust': ['rsl'],
 \}
 
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+
   " Run linter on save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -163,10 +170,10 @@ let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 
 " =============================================================================
-" ctrlp.vim
+"                                ctrlp.vim
 " =============================================================================
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPBuffer'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
@@ -176,7 +183,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:deoplete#enable_at_startup = 1
 
 " =============================================================================
-" LanguageClient
+"                               LanguageClient
 " =============================================================================
 " Required for operations modifying multiple buffers like rename.
 set hidden
@@ -184,7 +191,7 @@ set hidden
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'rls'],
-    \ 'javascript': [],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'css': ['css-languageserver', '--stdio'],
     \ 'vue': ['vls'],
     \ }
@@ -194,9 +201,14 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " =============================================================================
-" NERDTree
+"                                   NERDTree
 " =============================================================================
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " Autoclose nvim if only NERDTree is open
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" =============================================================================
+"                                  Tagbar 
+" =============================================================================
+nmap <F8> :TagbarToggle<CR>
