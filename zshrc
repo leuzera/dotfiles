@@ -52,26 +52,16 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 if [[ -f ${ZDOTDIR:-$HOME}/.zsh_aliases ]]; then
     . ${ZDOTDIR:-$HOME}/.zsh_aliases
 fi
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$PATH:$HOME/.local/bin"
-fi
 
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # NVM
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Install Ruby Gems to ~/.local/gems
-export GEM_HOME=$HOME/.local/gems
-export PATH=$HOME/.local/gems/bin:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc' ]; then

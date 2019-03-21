@@ -12,7 +12,7 @@ fi
 ################ Zsh ##################
 if command -v zsh > /dev/null; then
     echo "Configuring zsh..."
-    ln -sfi ~/.dotfiles/zshenv_home ${HOME}/.zshenv
+    ln -sfi ~/.dotfiles/zshenv ${HOME}/.zshenv
     . ${HOME}/.zshenv
 
     if [[ ! -d ${ZDOTDIR} ]]; then
@@ -22,7 +22,7 @@ if command -v zsh > /dev/null; then
         mkdir ${ZDOTDIR}/user-functions
     fi
 
-    ln -sfi ~/.dotfiles/zshenv ${ZDOTDIR}/.zshenv
+    ln -sfi ~/.dotfiles/zprofile ${ZDOTDIR:-$HOME}/.zprofile
     ln -sfi ~/.dotfiles/zshrc ${ZDOTDIR:-$HOME}/.zshrc
     ln -sfi ~/.dotfiles/zsh_aliases ${ZDOTDIR:-$HOME}/.zsh_aliases
 
