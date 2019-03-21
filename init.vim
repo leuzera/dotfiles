@@ -21,13 +21,13 @@ Plug 'yggdroot/indentline'
   " Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
-" Language Server Protocol (LSP) support for vim and neovim. 
+" Language Server Protocol (LSP) support for vim and neovim.
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
 
-" A command-line fuzzy finder 
+" A command-line fuzzy finder
 Plug 'junegunn/fzf'
 
   " ctrlp.vim
@@ -38,6 +38,7 @@ Plug 'scrooloose/nerdtree'
 
   " colorscheme
 Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim'
 
   " Vue syntax highlight
@@ -57,7 +58,8 @@ endif
   " ============================================================================
   "                                   RUST
   " ============================================================================
-  " This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
+  " This is a Vim plugin that provides Rust file detection, syntax highlighting,
+  " formatting, Syntastic integration, and more.
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'roxma/nvim-cm-racer'
@@ -75,7 +77,7 @@ set showbreak=+++ 	    " Wrap-broken line prefix
 
 set wrap                " Break lines
 set textwidth=79        " Text width
-set formatoptions=qrn1  
+set formatoptions=qrn1
 set colorcolumn=85      " Colored collum at 85 characters
 
 set showmatch	        " Highlight matching brace
@@ -98,7 +100,9 @@ set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
 syntax enable           " Turn on color syntax highlighting
-colorscheme dracula
+let base16colorspace=256  " Access colors present in 256 colorspace
+set termguicolors
+colorscheme base16-dracula
 
   " Show invisible characters
 " set showbreak=↪\
@@ -109,7 +113,7 @@ colorscheme dracula
 set ruler	            " Show row and column ruler information
 
 set undolevels=1000	    " Number of undo levels
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "TrueColor
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "TrueColor
 
   " encoding
 set encoding=utf-8
@@ -209,6 +213,6 @@ let NERDTreeShowHidden=1
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " =============================================================================
-"                                  Tagbar 
+"                                  Tagbar
 " =============================================================================
 nmap <F8> :TagbarToggle<CR>
