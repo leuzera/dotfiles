@@ -8,13 +8,27 @@ SAVEHIST="${HISTSIZE}"
 autoload -Uz promptinit
 promptinit
 
+if [ ! -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
+    git clone https://github.com/romkatv/powerlevel10k.git ${ZDOTDIR}/powerlevel10k
+fi
+if [ ! -f "${ZDOTDIR}/purepower" ]; then
+    curl -fsSL https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower -o ${ZDOTDIR}/purepower
+fi
+
 # prompt theme
-prompt pure
+if [ -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
+    source ${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme
+    if [ -f "${ZDOTDIR}/purepower" ]; then
+        source ${ZDOTDIR}/purepower
+    fi
+else
+    prompt pure
+fi
 
 setopt histignorealldups sharehistory
 
 # using vi mode
-bindkey -v
+# bindkey -v
 
 # Only the past commands matching the current line up to the current cursor
 # position will be shown
@@ -65,8 +79,6 @@ fi
 # NVM
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Install Ruby Gems to ~/.local/gems
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc' ]; then
