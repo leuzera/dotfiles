@@ -14,6 +14,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
   " lean & mean status/tabline for vim that's light as air<Paste>
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 
   " A Vim plugin for visually displaying indent levels in code
 Plug 'yggdroot/indentline'
@@ -149,6 +150,7 @@ nnoremap k gk
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:tmuxline_powerline_separators = 0
 let g:airline_theme='dracula'
 
 " ==============================================================================
