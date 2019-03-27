@@ -9,7 +9,7 @@ autoload -Uz promptinit
 promptinit
 
 if [ ! -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
-    git clone https://github.com/romkatv/powerlevel10k.git ${ZDOTDIR}/powerlevel10k
+    git clone --depth 1 https://github.com/romkatv/powerlevel10k.git ${ZDOTDIR}/powerlevel10k
 fi
 if [ ! -f "${ZDOTDIR}/purepower" ]; then
     curl -fsSL https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower -o ${ZDOTDIR}/purepower
