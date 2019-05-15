@@ -131,10 +131,28 @@ nnoremap k gk
 " ============================================================================
 "                                   Airline
 " ============================================================================
+" Dont show empty sections
+let g:airline_skip_empty_sections = 1
+" Tabline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+" Disable TagBar extension
+let g:airline#extensions#tagbar#enabled = 0
+" Dont use powerline separators on tmuxline
 let g:tmuxline_powerline_separators = 0
+" Change airlone theme
 let g:airline_theme='dracula'
+
+" Use coc-git to show git infos
+function! GitProjectStatus()
+  return get(g:, 'coc_git_status', '')
+endfunction
+call airline#parts#define_function('branch', 'GitProjectStatus')
+
+function! GitBufferStatus()
+    return get(b:, 'coc_git_status', '')
+endfunction
+call airline#parts#define_function('hunks', 'GitBufferStatus')
 
 " ============================================================================
 "                                   NERDTree
@@ -166,7 +184,8 @@ let g:coc_global_extensions = [
     \'coc-eslint',
     \'coc-tslint',
     \'coc-prettier',
-    \'coc-tslint-plugin'
+    \'coc-tslint-plugin',
+    \'coc-git'
     \] 
 
 " Better display for messages
