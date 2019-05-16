@@ -18,7 +18,7 @@ Plug 'edkolev/tmuxline.vim'
 
 " Intellisense engine for vim8 & neovim,
 " full language server protocol support as VSCode
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 " Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Plug 'Shougo/denite.nvim'
