@@ -84,6 +84,9 @@ set softtabstop=4	    " Number of spaces per Tab
 set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
+set nobackup            " No backup file
+set nowritebackup
+
 syntax enable           " Turn on color syntax highlighting
 let base16colorspace=256  " Access colors present in 256 colorspace
 set termguicolors
