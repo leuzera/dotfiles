@@ -14,7 +14,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 " lean & mean status/tabline for vim that's light as air<Paste>
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 
 " Intellisense engine for vim8 & neovim,
 " full language server protocol support as VSCode
@@ -142,7 +142,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Disable TagBar extension
 let g:airline#extensions#tagbar#enabled = 0
 " Dont use powerline separators on tmuxline
-let g:tmuxline_powerline_separators = 0
+" let g:tmuxline_powerline_separators = 0
 " Change airlone theme
 let g:airline_theme='dracula'
 
