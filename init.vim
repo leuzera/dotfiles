@@ -18,7 +18,7 @@ Plug 'edkolev/tmuxline.vim'
 
 " Intellisense engine for vim8 & neovim,
 " full language server protocol support as VSCode
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 " Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Plug 'Shougo/denite.nvim'
@@ -83,6 +83,9 @@ set softtabstop=4	    " Number of spaces per Tab
 
 set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
+
+set nobackup            " No backup file
+set nowritebackup
 
 syntax enable           " Turn on color syntax highlighting
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -165,7 +168,7 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " ============================================================================
 "                                  Tagbar
 " ============================================================================
-nmap <F8> :TagbarToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
 
 " ============================================================================
 "                                 Denite 
