@@ -117,6 +117,8 @@ set completeopt=longest,menu
 set wildmenu                " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
+set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**,
+      \**target/scala**,**project/target**,*.jpg,*.gif,*.png,*.svg,*.zip
 
 set cmdheight=2     " Better display for messages
 set updatetime=300  " Smaller updatetime for CursorHold & CursorHoldI
