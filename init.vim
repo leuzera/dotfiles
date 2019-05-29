@@ -136,15 +136,9 @@ nnoremap k gk
 " ============================================================================
 "                                   Airline
 " ============================================================================
-" Dont show empty sections
-let g:airline_skip_empty_sections = 1
-"Denite
-let g:airline#extensions#denite#enabled = 1
-" Tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
 " Disable TagBar extension
 let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
 " Change airlone theme
 let g:airline_theme='dracula'
 
@@ -155,9 +149,18 @@ endfunction
 call airline#parts#define_function('branch', 'GitProjectStatus')
 
 function! GitBufferStatus()
-    return get(b:, 'coc_git_status', '')
+  return get(b:, 'coc_git_status', '')
 endfunction
 call airline#parts#define_function('hunks', 'GitBufferStatus')
+
+
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+" Configure error/warning section to use coc.nvim
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " ============================================================================
 "                                   NERDTree
