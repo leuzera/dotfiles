@@ -202,8 +202,8 @@ let s:denite_options = {'default' : {
             \ 'highlight_matched_range': 'Normal'
             \ }}
 
-nnoremap <silent> ; :Denite buffer<CR>
-nnoremap <C-p> :Denite file/rec<CR> 
+nnoremap <silent> ; :Denite -mode=normal buffer<CR>
+nnoremap <C-p> :Denite -mode=normal  file/rec<CR> 
 nnoremap <C-f> :<C-u>Denite grep:. -no-empty -mode=normal<CR> 
 
 " Open file commands
