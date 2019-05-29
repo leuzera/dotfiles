@@ -1,9 +1,9 @@
 " Install Vim Plug if not installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs 
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs 
           \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
- endif
+  autocmd VimEnter * PlugInstall
+endif
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -266,11 +266,11 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_docs()<CR>
 
 function! s:show_docs()
-    if (index(['vim','help'], &filetype) >= 0)
-	execute 'h '.expand('<cword>')
-    else
-	call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
