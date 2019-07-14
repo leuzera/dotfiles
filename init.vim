@@ -14,30 +14,28 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 
 " lean & mean status/tabline for vim that's light as air<Paste>
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'edkolev/tmuxline.vim'
+" Plug 'vim-airline/vim-airline-themes'
 
 " Intellisense engine for vim8 & neovim,
 " full language server protocol support as VSCode
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Plug 'Shougo/denite.nvim'
 
-" A Vim plugin for visually displaying indent levels in code
-" Plug 'yggdroot/indentline'
-
-" A tree explorer plugin for vim.
-Plug 'scrooloose/nerdtree'
+" A solid language pack for Vim.
+Plug 'sheerun/vim-polyglot'
 
 " colorscheme
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'chriskempson/base16-vim'
+" Plug 'dracula/vim'
+Plug 'joshdick/onedark.vim'
 
 " Vue syntax highlight
 Plug 'posva/vim-vue'
 
+" Vim plugin that displays tags in a window, ordered by scope
 Plug 'majutsushi/tagbar'
 
 " ============================================================================
@@ -89,10 +87,12 @@ set whichwrap+=<,>,h,l
 set nobackup            " No backup file
 set nowritebackup
 
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 syntax enable           " Turn on color syntax highlighting
-let base16colorspace=256  " Access colors present in 256 colorspace
-set termguicolors
-colorscheme base16-dracula
+colorscheme onedark
 
 " Advanced
 set ruler	            " Show row and column ruler information
@@ -138,23 +138,28 @@ nnoremap k gk
 " ============================================================================
 "                                   Airline
 " ============================================================================
+try
 " Disable TagBar extension
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
-" Change airlone theme
-let g:airline_theme='dracula'
 
 " Use coc-git to show git infos
-function! GitProjectStatus()
-  return get(g:, 'coc_git_status', '')
-endfunction
-call airline#parts#define_function('branch', 'GitProjectStatus')
-
 function! GitBufferStatus()
   return get(b:, 'coc_git_status', '')
 endfunction
 call airline#parts#define_function('hunks', 'GitBufferStatus')
 
+" Change airline theme
+let g:airline_theme='onedark'
+
+" Custom setup that removes filetype/whitespace from default vim airline bar
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
+
+" Update section z to just have line number
+let g:airline_section_z = airline#section#create(['linenr'])
+
+" Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 
@@ -163,57 +168,53 @@ let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 " Configure error/warning section to use coc.nvim
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
-" ============================================================================
-"                                   NERDTree
-" ============================================================================
-map <C-n> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-" Autoclose nvim if only NERDTree is open
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") 
-      \ && b:NERDTree.isTabTree()) | q | endif
-
-" Remove bookmarks and help text from NERDTree
-let g:NERDTreeMinimalUI = 1
-
-" Custom icons for expandable/expanded directories
-let g:NERDTreeDirArrowExpandable = '┃'
-let g:NERDTreeDirArrowCollapsible = '┗'
-
-" Hide certain files and directories from NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', 
-      \ '\.idea$[[dir]]', '\.sass-cache$']
+catch
+  echo 'Run :PlugInstall to install Airline'
+endtry
 
 " ============================================================================
 "                                  Tagbar
 " ============================================================================
+try
 nmap <silent> <F8> :TagbarToggle<CR>
-
+catch
+  echo 'Run :PlugInstall to install Tagbar'
+endtry
 " ============================================================================
 "                                 Denite 
 " ============================================================================
-let s:denite_options = {'default' : {
+try
+call denite#custom#option('default', {
             \ 'auto_resize': 1,
             \ 'prompt': 'λ:',
-            \ 'direction': 'rightbelow',
             \ 'winminheight': '10',
-            \ 'highlight_mode_insert': 'Visual',
-            \ 'highlight_mode_normal': 'Visual',
-            \ 'prompt_highlight': 'Function',
-            \ 'highlight_matched_char': 'Function',
-            \ 'highlight_matched_range': 'Normal'
-            \ }}
+            \ 'split': 'floating'})
 
-nnoremap <silent> ; :Denite -mode=normal buffer<CR>
-nnoremap <C-p> :Denite -mode=normal  file/rec<CR> 
-nnoremap <C-f> :<C-u>Denite grep:. -no-empty -mode=normal<CR> 
+nnoremap <silent> ; :Denite buffer<CR>
+nnoremap <C-p> :Denite file/rec<CR> 
+nnoremap <C-f> :<C-u>Denite grep:. -no-empty <CR> 
+
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <Tab>   denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> <ESC>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+endfunction
 
 " Open file commands
 call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
 call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
+catch
+  echo 'Run :PlugInstall to install Denite'
+endtry
 " ============================================================================
 "                                coc.vim 
 " ============================================================================
+try
 let g:coc_global_extensions = [
     \'coc-python',
     \'coc-rls',
@@ -280,3 +281,6 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+catch
+  echo 'Run :PlugInstall to install CoC.nvim' 
+endtry
