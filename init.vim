@@ -55,7 +55,7 @@ call plug#end()
 " ============================================================================
 "                                   General
 " ============================================================================
-let mapleader=","       " Change the <leader> key
+let mapleader="ç"       " Change the <leader> key
 set hidden
 set linebreak	        " Break lines at word (requires Wrap lines)
 set showbreak=+++ 	    " Wrap-broken line prefix
@@ -192,7 +192,8 @@ call denite#custom#option('default', {
 
 nnoremap <silent> ; :Denite buffer<CR>
 nnoremap <C-p> :Denite file/rec<CR> 
-nnoremap <C-f> :<C-u>Denite grep:. -no-empty <CR> 
+nnoremap <leader>f :<C-u>Denite grep:. -no-empty <CR> 
+nnoremap <leader>F :<C-u>DeniteCursorWord grep:. <CR> 
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -232,17 +233,17 @@ nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> <leader>ld <Plug>(coc-definition)
-nmap <silent> <leader>lt <Plug>(coc-type-definition)
-nmap <silent> <leader>li <Plug>(coc-implementation)
-nmap <silent> <leader>lf <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
 " Remap for rename current word
 nmap <leader>lr <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 " Fix autofix problem of current line
 nmap <leader>qf <Plug>(coc-fix-current)
