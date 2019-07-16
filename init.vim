@@ -209,6 +209,15 @@ endfunction
 " Open file commands
 call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
 call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
+
+" Change file/rec command.
+call denite#custom#var('file/rec', 'command',
+	\ ['rg', '--files', '--hidden', '--glob', '!.git'])
+
+" Change ignore_globs
+call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+	      \ [ '.git/', '.ropeproject/', '__pycache__/',
+	      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
 catch
   echo 'Run :PlugInstall to install Denite'
 endtry
