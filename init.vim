@@ -9,81 +9,64 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 "
 call plug#begin('~/.local/share/nvim/site/plugged')
-  " Make sure you use single quotes
+" Make sure you use single quotes
 
-  " lean & mean status/tabline for vim that's light as air<Paste>
+" lean & mean status/tabline for vim that's light as air<Paste>
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'vim-airline/vim-airline-themes'
 
-  " A Vim plugin for visually displaying indent levels in code
-Plug 'yggdroot/indentline'
+" Intellisense engine for vim8 & neovim,
+" full language server protocol support as VSCode
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  " Asynchronous Lint Engine
-Plug 'w0rp/ale'
+" Dark powered asynchronous unite all interfaces for Neovim/Vim8
+Plug 'Shougo/denite.nvim'
 
-" Language Server Protocol (LSP) support for vim and neovim.
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" A solid language pack for Vim.
+Plug 'sheerun/vim-polyglot'
 
-" A command-line fuzzy finder
-Plug 'junegunn/fzf'
+" colorscheme
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'chriskempson/base16-vim'
+" Plug 'dracula/vim'
+Plug 'joshdick/onedark.vim'
 
-  " ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
-
-  " A tree explorer plugin for vim.
-Plug 'scrooloose/nerdtree'
-
-  " colorscheme
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim'
-
-  " Vue syntax highlight
+" Vue syntax highlight
 Plug 'posva/vim-vue'
 
+" Vim plugin that displays tags in a window, ordered by scope
 Plug 'majutsushi/tagbar'
 
-  " Dark powered asynchronous completion framework for neovim/Vim8
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
-  " ============================================================================
-  "                                   RUST
-  " ============================================================================
-  " This is a Vim plugin that provides Rust file detection, syntax highlighting,
-  " formatting, Syntastic integration, and more.
+" ============================================================================
+"                                   RUST
+" ============================================================================
+" This is a Vim plugin that provides Rust file detection, syntax highlighting,
+" formatting, Syntastic integration, and more.
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'roxma/nvim-cm-racer'
-" ==============================================================================
+" ============================================================================
 
-  " Initialize plugin system
+
+" Initialize plugin system
 call plug#end()
 
-" ==============================================================================
+" ============================================================================
 "                                   General
-" ==============================================================================
-let mapleader=","       " Change the <leader> key
+" ============================================================================
+let mapleader="ç"       " Change the <leader> key
+set hidden
 set linebreak	        " Break lines at word (requires Wrap lines)
 set showbreak=+++ 	    " Wrap-broken line prefix
 
 set wrap                " Break lines
 set textwidth=79        " Text width
 set formatoptions=qrn1
-set colorcolumn=85      " Colored collum at 85 characters
+set colorcolumn=79,99,119 " Colored collum at 79,99,119 characters
 
 set showmatch	        " Highlight matching brace
 set visualbell	        " Use visual bell (no beeping)
-set showcmd             " Display an incomplete command in the corner of the Vim
+set showcmd             " Display an incomplete command in the corner of Vim
 
 set hlsearch	        " Highlight all search results
 set smartcase	        " Enable smart-case search
@@ -92,31 +75,31 @@ set incsearch	        " Searches for strings incrementally
 
 set autoindent	        " Auto-indent new lines
 set expandtab	        " Use spaces instead of tabs
-set shiftwidth=4	    " Number of auto-indent spaces
+set shiftwidth=2	    " Number of auto-indent spaces
 set smartindent	        " Enable smart-indent
 set smarttab	        " Enable smart-tabs
-set softtabstop=4	    " Number of spaces per Tab
+set softtabstop=2	    " Number of spaces per Tab
 
 set backspace=indent,eol,start " make that backspace key work the way it should
 set whichwrap+=<,>,h,l
 
+set nobackup            " No backup file
+set nowritebackup
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 syntax enable           " Turn on color syntax highlighting
-let base16colorspace=256  " Access colors present in 256 colorspace
-set termguicolors
-colorscheme base16-dracula
+colorscheme onedark
 
-  " Show invisible characters
-" set showbreak=↪\
-" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-" set list
-
-  " Advanced
+" Advanced
 set ruler	            " Show row and column ruler information
 
 set undolevels=1000	    " Number of undo levels
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "TrueColor
 
-  " encoding
+" encoding
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set termencoding=utf-8
@@ -125,14 +108,21 @@ set formatoptions+=m
 
 set formatoptions+=B
 
-  " select & complete
+" select & complete
 set selection=inclusive
 set selectmode=mouse,key
 
 set completeopt=longest,menu
-set wildmenu                           " show a navigable menu for tab completion
+set wildmenu                " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set wildignore=*.o,*~,*.pyc,*.class
+set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**,
+      \**target/scala**,**project/target**,*.jpg,*.gif,*.png,*.svg,*.zip
+
+set cmdheight=2     " Better display for messages
+set updatetime=300  " Smaller updatetime for CursorHold & CursorHoldI
+set shortmess+=c    " don't give |ins-completion-menu| messages.
+set signcolumn=yes  " always show signcolumns
 
 " Navigation
 " Disable arrow keys
@@ -144,77 +134,162 @@ nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" ==============================================================================
+" ============================================================================
 "                                   Airline
-" ==============================================================================
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:tmuxline_powerline_separators = 0
-let g:airline_theme='dracula'
+" ============================================================================
+try
+" Disable TagBar extension
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
 
-" ==============================================================================
-"                                   ALE
-" ==============================================================================
-  " Navigate between errors
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)   " CTRL+k
-nmap <silent> <C-j> <Plug>(ale_next_wrap)       " CTRL+j
+" Use coc-git to show git infos
+function! GitBufferStatus()
+  return get(b:, 'coc_git_status', '')
+endfunction
+call airline#parts#define_function('hunks', 'GitBufferStatus')
 
-let g:ale_linters = {
-\   'rust': ['rsl'],
-\}
+" Change airline theme
+let g:airline_theme='onedark'
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\}
+" Custom setup that removes filetype/whitespace from default vim airline bar
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
 
-  " Run linter on save
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_completion_enabled = 0
-let g:ale_fix_on_save = 1
+" Update section z to just have line number
+let g:airline_section_z = airline#section#create(['linenr'])
 
-" =============================================================================
-"                                ctrlp.vim
-" =============================================================================
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPBuffer'
+" Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 
-" =============================================================================
-" Deoplete
-" =============================================================================
-let g:deoplete#enable_at_startup = 1
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-" =============================================================================
-"                               LanguageClient
-" =============================================================================
-" Required for operations modifying multiple buffers like rename.
-set hidden
+" Configure error/warning section to use coc.nvim
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+catch
+  echo 'Run :PlugInstall to install Airline'
+endtry
 
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'css': ['css-languageserver', '--stdio'],
-    \ 'vue': ['vls'],
-    \ }
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-" =============================================================================
-"                                   NERDTree
-" =============================================================================
-map <C-n> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-" Autoclose nvim if only NERDTree is open
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" =============================================================================
+" ============================================================================
 "                                  Tagbar
-" =============================================================================
-nmap <F8> :TagbarToggle<CR>
+" ============================================================================
+try
+nmap <silent> <F8> :TagbarToggle<CR>
+catch
+  echo 'Run :PlugInstall to install Tagbar'
+endtry
+" ============================================================================
+"                                 Denite 
+" ============================================================================
+try
+call denite#custom#option('default', {
+            \ 'auto_resize': 1,
+            \ 'prompt': 'λ:',
+            \ 'winminheight': '10',
+            \ 'split': 'floating'})
+
+nnoremap <silent> ; :Denite buffer<CR>
+nnoremap <C-p> :Denite file/rec<CR> 
+nnoremap <leader>f :<C-u>Denite grep:. -no-empty <CR> 
+nnoremap <leader>F :<C-u>DeniteCursorWord grep:. <CR> 
+
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <Tab>   denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> <ESC>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+endfunction
+
+" Open file commands
+call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
+call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
+
+" Change file/rec command.
+call denite#custom#var('file/rec', 'command',
+	\ ['rg', '--files', '--hidden', '--glob', '!.git'])
+
+" Change ignore_globs
+call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+	      \ [ '.git/', '.ropeproject/', '__pycache__/',
+	      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+catch
+  echo 'Run :PlugInstall to install Denite'
+endtry
+" ============================================================================
+"                                coc.vim 
+" ============================================================================
+try
+let g:coc_global_extensions = [
+    \'coc-python',
+    \'coc-rls',
+    \'coc-json',
+    \'coc-eslint',
+    \'coc-tslint',
+    \'coc-prettier',
+    \'coc-tslint-plugin',
+    \'coc-git'
+    \] 
+
+
+" Use `lp` and `ln` for navigate diagnostics
+nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>lr <Plug>(coc-rename)
+
+" Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+" Fix autofix problem of current line
+nmap <leader>qf <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+"Close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_docs()<CR>
+
+function! s:show_docs()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+catch
+  echo 'Run :PlugInstall to install CoC.nvim' 
+endtry

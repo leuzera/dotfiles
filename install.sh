@@ -33,6 +33,15 @@ else
     echo "Zsh not installed."
 fi
 
+############### Alacritty ###############
+if command -v alacritty > /dev/null; then
+    echo "Configuring Alacritty..."
+    ln -sfi ~/.dotfiles/alacritty ~/.config/alacritty
+    echo "\tdone."
+else
+    echo "Alacritty not installed."
+fi
+
 ############### Tmux ####################
 if command -v tmux > /dev/null; then
     echo "Configuring tmux..."
