@@ -142,20 +142,8 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc' ]; then
-    . '/home/leonardo/.local/google-cloud-sdk/path.zsh.inc';
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/leonardo/.local/google-cloud-sdk/completion.zsh.inc' ]; then
-    . '/home/leonardo/.local/google-cloud-sdk/completion.zsh.inc';
-fi
-
-# Anaconda
-if [ -f '/home/leonardo/.local/anaconda3/etc/profile.d/conda.sh' ]; then
-    . '/home/leonardo/.local/anaconda3/etc/profile.d/conda.sh'
-fi
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/config/zsh/.p10k.zsh.
+[[ -f ~/.dotfiles/config/zsh/.p10k.zsh ]] && source ~/.dotfiles/config/zsh/.p10k.zsh
 
 #============================================================================#
 #
@@ -171,6 +159,3 @@ export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
-
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles/config/zsh/.p10k.zsh.
-[[ -f ~/.dotfiles/config/zsh/.p10k.zsh ]] && source ~/.dotfiles/config/zsh/.p10k.zsh
