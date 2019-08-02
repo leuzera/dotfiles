@@ -3,7 +3,7 @@
 ############ Neovim ###################
 if command -v nvim > /dev/null; then
     echo "Configuring neovim..."
-    ln -sfi ~/.dotfiles/init.vim ~/.config/nvim/init.vim
+    ln -sfi $(readlink -f ./config/nvim) ${HOME}/.config/nvim
     echo "\tdone."
 else
     echo "Neovim not installed."
@@ -12,22 +12,10 @@ fi
 ################ Zsh ##################
 if command -v zsh > /dev/null; then
     echo "Configuring zsh..."
-    ln -sfi ~/.dotfiles/zshenv ${HOME}/.zshenv
+    ln -sf $(readlink -f ./zshenv) ${HOME}/.zshenv
     . ${HOME}/.zshenv
 
-    if [[ ! -d ${ZDOTDIR} ]]; then
-        mkdir ${ZDOTDIR}
-    fi
-    if [[ ! -d ${ZDOTDIR}/user-functions ]]; then
-        mkdir ${ZDOTDIR}/user-functions
-    fi
-
-    ln -sfi ~/.dotfiles/zprofile ${ZDOTDIR:-$HOME}/.zprofile
-    ln -sfi ~/.dotfiles/zshrc ${ZDOTDIR:-$HOME}/.zshrc
-    ln -sfi ~/.dotfiles/zsh_aliases ${ZDOTDIR:-$HOME}/.zsh_aliases
-
-    ln -sfi ~/.dotfiles/pure/pure.zsh ${ZDOTDIR:-$HOME}/user-functions/prompt_pure_setup
-    ln -sfi ~/.dotfiles/pure/async.zsh ${ZDOTDIR:-$HOME}/user-functions/async
+    ln -sf $(readlink -f ./config/zsh) ${ZDOTDIR}
     echo "\tdone."
 else
     echo "Zsh not installed."
@@ -36,7 +24,7 @@ fi
 ############### Alacritty ###############
 if command -v alacritty > /dev/null; then
     echo "Configuring Alacritty..."
-    ln -sfi ~/.dotfiles/alacritty ~/.config/alacritty
+    ln -sf $(readlink -f ./config/alacritty) ${HOME}/.config/alacritty
     echo "\tdone."
 else
     echo "Alacritty not installed."
@@ -45,7 +33,7 @@ fi
 ############### Tmux ####################
 if command -v tmux > /dev/null; then
     echo "Configuring tmux..."
-    ln -sfi ~/.dotfiles/tmux.conf ~/.tmux.conf
+    ln -sf $(readlink -f ./tmux.conf) ${HOME}/.tmux.conf
     echo "\tdone."
 else
     echo "Tmux not installed."
@@ -55,31 +43,9 @@ fi
 if command -v tint2 > /dev/null; then
     echo "Configuring tint2..."
 
-    ln -sfi $(readlink -f ./tint2) ~/.config/tint2
+    ln -sf $(readlink -f ./config/tint2) ${HOME}/.config/tint2
 
 else
     echo "Tint2 not installed."
 fi
 
-############### Rofi ##################
-if command -v rofi > /dev/null; then
-    echo "Configuring rofi..."
-
-    if [[ ! -d ~/.config/rofi ]]; then
-        mkdir ~/.config/rofi
-    fi
-
-    ln -sfi ./rofi.config ~/.config/rofi/config
-    echo "\tdone."
-else
-    echo "Rofi not installed."
-fi
-
-################# ZPrezto ################
-if [[ -d ${ZDOTDIR:-$HOME}/.zprezto ]]; then
-    echo "Configuring zpresto..."
-    ln -sfi ~/.dotfiles/zprestorc ${ZDOTDIR:-$HOME}/.zpreztorc
-    echo "\tdone."
-else
-    echo "ZPresto not installed."
-fi

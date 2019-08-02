@@ -1,0 +1,7 @@
+# some ls aliases
+alias ls='ls --color'
+alias ll='ls --color -alF'
+alias la='ls --color -A'
+alias l='ls --color -CF'
+
+alias update_suru='wget -qO- https://raw.githubusercontent.com/gusbemacbe/suru-plus/master/install.sh | env DESTDIR="$HOME/.icons" sh'

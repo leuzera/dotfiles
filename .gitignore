@@ -1,0 +1,7 @@
+# Neovim
+config/nvim/autoload
+
+# ZSH
+config/zsh/.zsh_history
+config/zsh/.zcompdump
+config/zsh/cache
