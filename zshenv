@@ -11,7 +11,7 @@ NVM_DIR="$HOME/.nvm"
 GEM_HOME=$HOME/.local/gems
 
 JAVA_HOME="/usr/lib/jvm/default"
-ANDROID_HOME="$HOME/.local/Android/Sdk"
+ANDROID_HOME="$HOME/.local/android/sdk"
 
 # colored GCC warnings and errors
 GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
