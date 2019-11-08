@@ -29,7 +29,7 @@ fi
 
 # set PATH to include Android SDK tools if it exists
 if [ -d "$HOME/.local/android/sdk" ]; then
-  path=($JAVA_HOME/bin $ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $path[@])
+  path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $path[@])
 fi
 
 path=($JAVA_HOME/bin $path[@])
