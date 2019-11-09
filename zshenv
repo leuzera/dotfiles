@@ -2,16 +2,9 @@ ZDOTDIR="${HOME}/.config/zsh"
 
 fpath=("${ZDOTDIR}/user-functions" $fpath)
 
-if [[ -d ${HOME}/zsh ]];
-then
+if [[ -d ${HOME}/zsh ]]; then
     . $ZDOTDIR/.zshenv
 fi
-
-NVM_DIR="$HOME/.nvm"
-GEM_HOME=$HOME/.local/gems
-
-JAVA_HOME="/usr/lib/jvm/default"
-ANDROID_HOME="$HOME/.local/android/sdk"
 
 # colored GCC warnings and errors
 GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -27,9 +20,11 @@ if [ -d "$HOME/.local/bin" ] ; then
   path=($HOME/.local/bin $path[@])
 fi
 
-# set PATH to include Android SDK tools if it exists
-if [ -d "$HOME/.local/android/sdk" ]; then
-  path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $path[@])
+if [ -d "$JAVA_HOME" ]; then
+  path=($JAVA_HOME/bin $path[@])
 fi
 
-path=($JAVA_HOME/bin $path[@])
+# set PATH to include Android SDK tools if it exists
+if [ -d "$ANDROID_HOME" ]; then
+  path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $path[@])
+fi

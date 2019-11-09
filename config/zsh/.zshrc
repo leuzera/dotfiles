@@ -157,8 +157,6 @@ fi
 # prompt theme
 if [ -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
     source ${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme
-else
-    prompt pure
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
