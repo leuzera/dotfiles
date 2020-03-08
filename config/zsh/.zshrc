@@ -139,5 +139,14 @@ export LESS=-r
 #============================================================================#
 autoload -Uz promptinit
 promptinit
-PS1='%n %~ %(!.#.❯ )'
-RPS1='%? %T'
+
+if [ ! -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ];
+  then
+    git clone --depth 1 https://github.com/romkatv/powerlevel10k.git ${ZDOTDIR}/powerlevel10k
+    source ${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme
+  else
+    source ${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source ${ZDOTDIR}/.p10k.zsh

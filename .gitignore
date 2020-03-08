@@ -1,4 +1,5 @@
 **/*/.netrwhist
+**/*/powerlevel10k/
 
 # Neovim
 config/nvim/autoload
