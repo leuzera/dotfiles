@@ -15,12 +15,14 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-" Intellisense engine for vim8 & neovim,
-" full language server protocol support as VSCode
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Dark powered asynchronous completion framework for neovim/Vim8
+Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Plug 'Shougo/denite.nvim'
+
+" Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+Plug 'dense-analysis/ale'
 
 " A solid language pack for Vim.
 Plug 'sheerun/vim-polyglot'
@@ -34,9 +36,6 @@ Plug 'joshdick/onedark.vim'
 " Vue syntax highlight
 Plug 'posva/vim-vue'
 
-" Vim plugin that displays tags in a window, ordered by scope
-Plug 'majutsushi/tagbar'
-
 " ============================================================================
 "                                   RUST
 " ============================================================================
@@ -46,7 +45,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'roxma/nvim-cm-racer'
 " ============================================================================
-
 
 " Initialize plugin system
 call plug#end()
@@ -142,12 +140,6 @@ try
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-" Use coc-git to show git infos
-function! GitBufferStatus()
-  return get(b:, 'coc_git_status', '')
-endfunction
-call airline#parts#define_function('hunks', 'GitBufferStatus')
-
 " Change airline theme
 let g:airline_theme='onedark'
 
@@ -171,14 +163,6 @@ catch
   echo 'Run :PlugInstall to install Airline'
 endtry
 
-" ============================================================================
-"                                  Tagbar
-" ============================================================================
-try
-nmap <silent> <F8> :TagbarToggle<CR>
-catch
-  echo 'Run :PlugInstall to install Tagbar'
-endtry
 " ============================================================================
 "                                 Denite 
 " ============================================================================
@@ -220,76 +204,21 @@ call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
 catch
   echo 'Run :PlugInstall to install Denite'
 endtry
+
 " ============================================================================
-"                                coc.vim 
+"                                 Deoplete 
 " ============================================================================
 try
-let g:coc_global_extensions = [
-    \'coc-python',
-    \'coc-rls',
-    \'coc-json',
-    \'coc-eslint',
-    \'coc-tslint',
-    \'coc-prettier',
-    \'coc-tslint-plugin',
-    \'coc-git'
-    \] 
-
-
-" Use `lp` and `ln` for navigate diagnostics
-nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gt <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-
-" Remap for rename current word
-nmap <leader>lr <Plug>(coc-rename)
-
-" Remap for format selected region
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-" Fix autofix problem of current line
-nmap <leader>qf <Plug>(coc-fix-current)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"Close preview window when completion is done.
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_docs()<CR>
-
-function! s:show_docs()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+let g:deoplete#enable_at_startup = 1
 catch
-  echo 'Run :PlugInstall to install CoC.nvim' 
+  echo 'Run :PlugInstall to install Deoplete'
+endtry
+
+" ============================================================================
+"                                 ALE 
+" ============================================================================
+try
+let g:airline#extensions#ale#enabled = 1
+catch
+  echo 'Run :PlugInstall to install ALE'
 endtry
