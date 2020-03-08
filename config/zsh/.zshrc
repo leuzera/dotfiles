@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Basic zsh config.
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE='10000'
@@ -124,9 +117,6 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles/config/zsh/.p10k.zsh.
-[[ -f ~/.dotfiles/config/zsh/.p10k.zsh ]] && source ~/.dotfiles/config/zsh/.p10k.zsh
-
 #============================================================================#
 #
 #========================= Others ===========================================#
@@ -149,17 +139,3 @@ export LESS=-r
 #============================================================================#
 autoload -Uz promptinit
 promptinit
-
-if [ ! -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
-    git clone https://github.com/romkatv/powerlevel10k.git ${ZDOTDIR}/powerlevel10k
-fi
-
-# prompt theme
-if [ -f "${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme" ]; then
-    source ${ZDOTDIR}/powerlevel10k/powerlevel10k.zsh-theme
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source ${ZDOTDIR}/.p10k.zsh
-
-
