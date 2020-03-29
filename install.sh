@@ -8,4 +8,4 @@ ln -sf $(readlink -f ./config/zsh) ${ZDOTDIR}
 ln -sf $(readlink -f ./config/alacritty) ${HOME}/.config/alacritty
 ln -sf $(readlink -f ./tmux.conf) ${HOME}/.tmux.conf
 ln -sf $(readlink -f ./config/tint2) ${HOME}/.config/tint2
-
+ln -sf $(readlink -f ./.profile) ${HOME}/.profile

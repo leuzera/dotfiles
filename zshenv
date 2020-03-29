@@ -28,3 +28,13 @@ fi
 if [ -d "$ANDROID_HOME" ]; then
   path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $path[@])
 fi
+
+# set PATH to include Flutter binaries if it exists
+if [ -d "$FLUTTER_HOME" ]; then
+  path=($FLUTTER_HOME/bin $path[@])
+fi
+
+# set PATH to DOTNET if it exists
+if [ -d "$DOTNET_HOME" ]; then
+  path=($DOTNET_HOME $path[@])
+fi
