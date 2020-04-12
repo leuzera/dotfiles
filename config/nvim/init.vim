@@ -13,7 +13,6 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 
 " lean & mean status/tabline for vim that's light as air<Paste>
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 
 " Dark powered asynchronous completion framework for neovim/Vim8
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -36,6 +35,8 @@ Plug 'joshdick/onedark.vim'
 " Vue syntax highlight
 Plug 'posva/vim-vue'
 
+" A very fast, multi-syntax context-sensitive color name highlighter
+Plug 'ap/vim-css-color'
 " ============================================================================
 "                                   RUST
 " ============================================================================
@@ -152,13 +153,6 @@ let g:airline_section_z = airline#section#create(['linenr'])
 " Smartly uniquify buffers names with similar filename, suppressing common parts of paths.
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-
-" Configure error/warning section to use coc.nvim
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 catch
   echo 'Run :PlugInstall to install Airline'
 endtry
