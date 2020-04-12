@@ -132,6 +132,13 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
+# CDPATH
+cdpath=($HOME/Projetos /mnt/dados /mnt/dados/Media/Series)
+
+# Exports
+export EDITOR=nvim
+export VISUAL=code
+
 #============================================================================#
 #
 #========================= Prompt ===========================================#
