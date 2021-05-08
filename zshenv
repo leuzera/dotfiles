@@ -1,3 +1,5 @@
+source ~/.profile
+
 ZDOTDIR="${HOME}/.config/zsh"
 
 fpath=("${ZDOTDIR}/user-functions" $fpath)
@@ -11,6 +13,7 @@ GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Setting PATH
 typeset -U path
+
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -26,7 +29,7 @@ fi
 
 # set PATH to include Android SDK tools if it exists
 if [ -d "$ANDROID_HOME" ]; then
-  path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $path[@])
+  path=($ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/emulator $ANDROID_HOME/ndk $path[@])
 fi
 
 # set PATH to include Flutter binaries if it exists
@@ -38,3 +41,5 @@ fi
 if [ -d "$DOTNET_HOME" ]; then
   path=($DOTNET_HOME $path[@])
 fi
+
+path=($HOME/.local/opt/android-studio/bin $path[@])

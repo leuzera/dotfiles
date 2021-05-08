@@ -6,5 +6,3 @@ alias l='ls --color -CF'
 
 alias rm='rm -i'
 alias mv='mv -i'
-
-alias androidVM="$HOME/.local/android/sdk/emulator/emulator @Temp_phone"

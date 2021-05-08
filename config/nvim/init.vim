@@ -27,9 +27,7 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 
 " colorscheme
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'chriskempson/base16-vim'
-" Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'joshdick/onedark.vim'
 
 " Vue syntax highlight
@@ -90,7 +88,7 @@ if (has("termguicolors"))
 endif
 
 syntax enable           " Turn on color syntax highlighting
-colorscheme onedark
+colorscheme dracula
 
 " Advanced
 set ruler	            " Show row and column ruler information
@@ -129,9 +127,6 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-" j and k work the way you expect
-nnoremap j gj
-nnoremap k gk
 
 " ============================================================================
 "                                   Airline
@@ -142,7 +137,7 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
 " Change airline theme
-let g:airline_theme='onedark'
+let g:airline_theme='dracula'
 
 " Custom setup that removes filetype/whitespace from default vim airline bar
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
