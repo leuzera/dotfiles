@@ -132,9 +132,6 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
-# CDPATH
-cdpath=($HOME/Projetos /mnt/dados /mnt/dados/Media/Series)
-
 # Exports
 export EDITOR=nvim
 export VISUAL=code
@@ -146,5 +143,10 @@ export VISUAL=code
 #============================================================================#
 autoload -Uz promptinit
 promptinit
+
+function set_win_title(){
+    echo -ne "\033]0; $(basename "$PWD") \007"
+}
+precmd_functions+=(set_win_title)
 
 eval "$(starship init zsh)"
